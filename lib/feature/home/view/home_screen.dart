@@ -28,9 +28,10 @@ class HomeScreen extends StatelessWidget {
           child: child!,
         ),
         child: FloatingActionButton(
-          child: Icon(ProviderScope.containerOf(context).read(speechListeningRef)
-              ? Icons.mic
-              : Icons.mic_none),
+          child: HookConsumer(
+            builder: (context, ref, child) =>
+                Icon(ref.watch(speechListeningRef) ? Icons.mic : Icons.mic_none),
+          ),
           onPressed: () => _listen(context, speech),
         ),
       ),
